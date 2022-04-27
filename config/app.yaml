@@ -1,0 +1,45 @@
+- id: 0
+  resourse:
+    host: "*"
+    path: "/[Ssc]*"
+    method: "{POST,GET}"
+  permission:
+    authorized_roles:
+      - student
+      - teacher
+      - administrator
+    forbidden_roles:
+      - visitor
+    allow_anyone: false
+
+#rule
+#等级0，即学生或者老师或者高级管理员可查看个人信息，对部分信息进行增删改
+#等级1，即老师或者高级管理员可以对选课学生进行增删改查的操作
+- id: 1
+  resourse:
+    host: teacher.com
+    path: "/[St]"
+    method: "*"
+  permission:
+    authorized_roles:
+      - teacher
+      - administrator
+    forbiddenRoles:
+      - visitor
+      - student
+    AllowAnyone: false
+
+#等级2，即高级管理员可以对老师以及学生的所有信息进行增删改查
+- id: 2
+  resourse:
+    host: administrator.com
+    path: "/[aS]"
+    method: "*"
+    Permission
+    authorized_roles:
+      - administrator
+    forbiddenRoles:
+      - visitor
+      - student
+      - teacher
+    AllowAnyone: false
